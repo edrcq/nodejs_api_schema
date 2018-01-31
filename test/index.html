@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Title of the document</title>
+    </head>
+
+    <body>
+    
+        <script src="http://localhost:3042/socket.io/socket.io.js"></script>
+        <script>
+            var authToken = "";
+
+            var socket = io.connect( 'http://127.0.0.1:3042', {
+                reconnection: true,
+                reconnectionDelay: 1000,
+                reconnectionDelayMax : 5000,
+                reconnectionAttempts: Infinity
+            } );
+
+            socket.on( 'connect', function () {
+                console.log( 'connected to server' );
+            } );
+
+            socket.on('auth', function(data) {
+                if (data.authToken) {
+                    authToken = data.authToken;
+                }
+            })
+
+            socket.on( 'disconnect', function () {
+                console.log( 'disconnected from server' );
+                window.setTimeout( 'app.connect()', 5000 );
+            } );
+        
+
+        </script>
+        
+    </body>
+
+</html> 

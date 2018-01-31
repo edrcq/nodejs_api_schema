@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/edrcq/nodejs_api_schema#readme",
   "dependencies": {
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.32.2",
     "socket.io": "^2.0.4"
   }
 }

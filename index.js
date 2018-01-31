@@ -1,5 +1,29 @@
 /* Load external modules */
 var io = require('socket.io')();
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('apimakr', 'apimakr', 'dmROdYiTCFz7IJWq', {
+    host: 'guiedo.com',
+    dialect: 'mysql',
+    pool: {
+        max: 10,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+});
+const User = require('./api/users/UserModel')(sequelize);
+User.sync().then(() => {});
+  
+
+sequelize
+.authenticate()
+    .then(() => {
+    console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+    console.error('Unable to connect to the database:', err);
+    process.exit(1);
+    });
 
 /* Load conf */
 const confGlobal = require('./conf/global');
